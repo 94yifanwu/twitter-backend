@@ -76,7 +76,7 @@ def aaa():
 
 @app.route('/search/<item>')
 def show(item, rdb):
-    return 'this hello'
+    return 'this /search/<item>'
 
     return item
     row = rdb.get(item)

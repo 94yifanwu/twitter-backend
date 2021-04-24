@@ -71,7 +71,7 @@ app.default_error_handler = json_error_handler
 
 @get('/')
 def aaa():
-    return 'this is new search engine page'
+    return 'use /search/<item> in url'
 
 
 @app.route('/search/<item>')

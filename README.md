@@ -3,6 +3,7 @@
 This project includes API gateway, load balace, basic authentication for micro blog services. DynamoDB for directly messages services. Redis for reversed index search engineer to search posts contents.
 
 ---
+working on proj6
 
 1.  $ redis-server
 

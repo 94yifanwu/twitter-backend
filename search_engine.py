@@ -15,8 +15,7 @@ import base64
 import bottle
 from bottle import auth_basic, route, request, response, get
 from bottle.ext import redis
-
-import requests
+#import requests
 
 
 # Allow JSON values to be loaded from app.config[key]
@@ -70,15 +69,13 @@ app.default_error_handler = json_error_handler
 
 
 @get('/')
-def aaa():
+def a():
     return 'use /search/<item> in url'
 
 
 @app.route('/search/<item>')
 def show(item, rdb):
-    return 'this /search/<item>'
 
-    return item
     row = rdb.get(item)
     if row:
         return template('showitem', item=item)

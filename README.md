@@ -3,6 +3,7 @@
 This project includes API gateway, load balace, basic authentication for micro blog services. DynamoDB for directly messages services. Redis for reversed index search engineer to search posts contents.
 
 ---
+
 working on proj6
 
 1.  $ redis-server
@@ -30,11 +31,9 @@ Returns a list of postIds whose text contains any of the words in keywordList un
 
 # Initialize:
 
-1: `./run_db`
+1: `make` (use a separate terminal)
 
-2: `make` (use a separate terminal)
-
-3: `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1`
+2: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1`
 
 (option: run `make clean` ahead of `make` in case of pre-exist errors)
 

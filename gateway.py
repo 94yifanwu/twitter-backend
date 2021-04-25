@@ -3,8 +3,8 @@
 #
 # Inspired by <https://github.com/vishnuvardhan-kumar/loadbalancer.py>
 #
-## in this project, database_name is to indicate the url path element.
-## for example, localhost:5100/users/users.json , users is database and users.json is table/query
+# in this project, database_name is to indicate the url path element.
+# for example, localhost:5100/users/users.json , users is database and users.json is table/query
 
 import sys
 import json
@@ -77,20 +77,23 @@ if not sys.warnoptions:
 
 
 def get_user_id(username):
-    response = gateway("users/users.json?username=" + username + "&_shape=array&_nl=on")
+    response = gateway("users/users.json?username=" +
+                       username + "&_shape=array&_nl=on")
     response = json.loads(response)
     user_id = response["id"]
     return user_id
 
 
 def get_username(user_id):
-    response = gateway("users/users.json?id=" + user_id + "&_shape=array&_nl=on")
+    response = gateway("users/users.json?id=" +
+                       user_id + "&_shape=array&_nl=on")
     response = json.loads(response)
     return response["username"]
 
 
 def get_following(username):
-    response = gateway("users/following.json?username=" + username + "&_shape=array")
+    response = gateway("users/following.json?username=" +
+                       username + "&_shape=array")
     response = json.loads(response)
     following_array = []
     for res in response:
@@ -99,7 +102,8 @@ def get_following(username):
 
 
 def get_posts(username):
-    response = gateway("timelines/posts.json?username=" + username + "&_shape=array")
+    response = gateway("timelines/posts.json?username=" +
+                       username + "&_shape=array")
     response = json.loads(response)
     posts_array = []
     for res in response:
@@ -175,7 +179,9 @@ def gateway(url):
         database_name += "/*"
 
     # load balancing
-    turn_on_LB_table_remove = True    # if it's False then LB_table won't remove bad server
+    # if it's False then LB_table won't remove bad server
+    turn_on_LB_table_remove = False
+    # turn_on_LB_table_remove = True    # if it's False then LB_table won't remove bad server
 
     global LB_table
     try:
@@ -260,3 +266,8 @@ def gateway(url):
         response.set_header(name, value)
 
     return upstream_response.content
+
+
+@get("/favicon.ico")
+def fav():
+    return 'fav'

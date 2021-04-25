@@ -7,13 +7,11 @@
 import sys
 import textwrap
 import logging.config
-import sqlite3
 import boto3
 from boto3.dynamodb.conditions import Key, Attr
 import json
 import bottle
 from bottle import get, post, error, abort, request, response, HTTPResponse
-from bottle.ext import sqlite
 from botocore.exceptions import ClientError
 import uuid
 import datetime
@@ -29,7 +27,7 @@ def json_config(key):
 # Set up app and logging
 #
 app = bottle.default_app()
-app.config.load_config("./etc/gateway.ini")
+app.config.load_config("./etc/conf.ini")
 
 logging.config.fileConfig(app.config["logging.config"])
 
@@ -84,6 +82,8 @@ messages_table = boto3.resource("dynamodb", endpoint_url="http://localhost:8000"
 )
 
 # def send_direct_message(receiver, sender, content, quick_replies=None):
+
+
 def send_direct_message(inputs):
     chat_id = str(uuid.uuid4())
     chat_id = inputs["sender"] + "#" + chat_id[:4]
@@ -114,8 +114,8 @@ def reply_to_direct_message(inputs):
         FilterExpression=Attr("sender").eq(receiver),
         ScanIndexForward=False,  # order_by
     )
-    
-    #return json.dumps(last_message_response)
+
+    # return json.dumps(last_message_response)
 
     Items = {}
     if inputs["is_text"] == "False":
@@ -192,7 +192,6 @@ def list_direct_messages_for(username):
         logging.debug("no request.auth")
         #abort(401, "Not signed in with the sender")
 
-        
     response = messages_table.query(
         IndexName="receiver-index",
         KeyConditionExpression=Key("receiver").eq(username),

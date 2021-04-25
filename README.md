@@ -1,6 +1,6 @@
 # 449-proj6-bottle-gateway-dynamoDB-redis
 
-This project includes API gateway, load balace, basic authentication for micro blog services. DynamoDB for directly messages services. Redis for reversed index search engineer to search posts contents.
+This project includes API gateway, load balace, basic authentication for micro blog services. DynamoDB for directly messages services. Redis for inverted index search engine to search posts contents.
 
 ---
 

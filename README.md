@@ -6,8 +6,6 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 working on proj6
 
-1.  $ redis-server
-
 2.  $ foreman start
 
 3.  go to browser and enter localhost:5000/search/

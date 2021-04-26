@@ -5,7 +5,8 @@ import boto3
 
 def load_data(chats, dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource("dynamodb", endpoint_url="http://localhost:8000")
+        dynamodb = boto3.resource(
+            "dynamodb", endpoint_url="http://localhost:8000")
 
     table = dynamodb.Table("messages")
     for chat in chats:
@@ -16,6 +17,6 @@ def load_data(chats, dynamodb=None):
 
 
 if __name__ == "__main__":
-    with open("./mockroblog/chat_data.json") as json_file:
+    with open("./init_data/chat_data.json") as json_file:
         chat_list = json.load(json_file)
     load_data(chat_list)

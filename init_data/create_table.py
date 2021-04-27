@@ -3,7 +3,8 @@ import boto3
 
 def create_table(dynamodb=None):
     if not dynamodb:
-        dynamodb = boto3.resource("dynamodb", endpoint_url="http://localhost:8000")
+        dynamodb = boto3.resource(
+            "dynamodb", endpoint_url="http://localhost:8000")
 
     table = dynamodb.create_table(
         TableName="messages",
@@ -15,7 +16,8 @@ def create_table(dynamodb=None):
             {"AttributeName": "chat_id", "AttributeType": "S"},
             {"AttributeName": "timestamp", "AttributeType": "S"},
         ],
-        ProvisionedThroughput={"ReadCapacityUnits": 10, "WriteCapacityUnits": 10},
+        ProvisionedThroughput={
+            "ReadCapacityUnits": 10, "WriteCapacityUnits": 10},
     )
 
     return table
@@ -23,4 +25,4 @@ def create_table(dynamodb=None):
 
 if __name__ == "__main__":
     table = create_table()
-    print("Table status:", table.table_status)
+    print("- DM Table status:", table.table_status)

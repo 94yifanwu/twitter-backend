@@ -80,19 +80,33 @@ for s in test_str:
 '''
 
 
-@app.route('/search-engine/<item>')
-def show(item, rdb):
+@get('/search-engine/<item>')
+def show_first_page(item, rdb):
     row = rdb.get(item)
     if row:
-        return template('showitem', item=item)
+        return (row)
     return HTTPError(404, item+"  hehehe Page not found")
 
 
-STOP_WORDS = set('''the he at but there of was be not use and for this what an a on have all each to are from were which in as or we she is with ine when do you his had your how that they by can their it I word said if'''.split())
-WORDS_RE = re.compile("[a-z']{2,}")
+# return all result OR
+# test: http://localhost:5000/search-engine/search/sets+yifan
+@get('/search-engine/search/<inputs>')
+def search_keys(inputs, rdb):
+    keys = inputs.split('+')  # the input is splited by + sign
+    post_ids = []
+    for key in keys:
+        row = rdb.smembers(key)
+        if row:
+            for r in row:
+                post_ids.append(r.decode('UTF-8'))
+        else:
+            pass
+    return str(post_ids)  # convert to json?
 
 
+#STOP_WORDS = set('''the at but there of was be not use and for this what an a on have all each to are from were which in as or we she is with ine when do you his had your how that they by can their it I word said if'''.split())
 '''
+WORDS_RE = re.compile("[a-z']{2,}")
 def tokenize(content):
     words = set()
     for match in WORDS_RE.finditer(content.lower()):

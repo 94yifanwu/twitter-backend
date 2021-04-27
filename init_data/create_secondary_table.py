@@ -1,3 +1,4 @@
+# Create DynamoDB secondary index table GSI for Direct Messages, index is the username of receiver
 import boto3
 
 
@@ -40,4 +41,5 @@ def create_secondary_table(dynamodb=None):
 
 if __name__ == "__main__":
     table = create_secondary_table()
-    print("Secondary table status:", table["TableDescription"]["TableStatus"])
+    print("- DM Secondary table status:",
+          table["TableDescription"]["TableStatus"])

@@ -8,7 +8,7 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 2: `make` (use a separate terminal to pre-load and initial databases)
 
-option: run `make clean` ahead of `make` in case of pre-exist errors
+optional: run `make clean` ahead of `make` in case of pre-exist errors
 
 # Authentication:
 
@@ -16,7 +16,9 @@ example of search a post:
 
 `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 
-# Search Engine:
+# Test API
+
+## Search Engine:
 
 #### index(postId, text)
 
@@ -58,8 +60,6 @@ test this function:
 `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
 
 (`profavery OR tuffy` AND `test OR one` will return "3","1","10","6","5","4")
-
-# Test API
 
 ## direct messages
 

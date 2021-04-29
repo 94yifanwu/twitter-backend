@@ -14,7 +14,7 @@ option: run `make clean` ahead of `make` in case of pre-exist errors
 
 example of search a post:
 
-`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
+`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 
 # Search Engine:
 

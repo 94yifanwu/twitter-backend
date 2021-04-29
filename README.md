@@ -17,14 +17,24 @@ Adds the text of a post identified by postId to the inverted index.
 search(keyword)
 Returns a list of postIds whose text contains keyword.
 
-any(keywordList)
+option 1: use browser and enter: `http://localhost:5000/search-engine/search/profavery`
+option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search/profavery'`
+
+any(keywordList) - OR
 Returns a list of postIds whose text contains any of the words in keywordList.
 
-all(keywordList)
+option 1: use browser and enter: `http://localhost:5000/search-engine/search-any/profavery+tuffy`
+option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
+
+all(keywordList) - AND
 Returns a list of postIds whose text contains all of the words in keywordList.
+option 1: use browser and enter: `http://localhost:5000/search-engine/search-all/profavery+tuffy`
+option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-all/profavery+tuffy'`
 
 exclude(includeList, excludeList)
-Returns a list of postIds whose text contains any of the words in keywordList unless they also contain a word in excludeList.
+Returns a list of postIds whose text contains any of the words in includeList unless they also contain a word in excludeList.
+option 1: use browser and enter: `http://localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one`
+option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
 
 ---
 

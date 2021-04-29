@@ -16,11 +16,16 @@ plugin = bottle.ext.redis.RedisPlugin(host='localhost')
 app.install(plugin)
 logging.config.fileConfig(app.config['logging.config'])
 
+f = open("./stopwords.txt", "r")
+STOP_WORDS = f.read()
+f.close()
 
 # Return errors in JSON
 #
 # Adapted from # <https://stackoverflow.com/a/39818780>
 #
+
+
 def json_error_handler(res):
     if res.content_type == 'application/json':
         return res.body
@@ -87,26 +92,72 @@ def show_first_page(item, rdb):
         return (row)
     return HTTPError(404, item+"  hehehe Page not found")
 
+# AND operation
+# test: http://localhost:5000/search-engine/search-all/test+yifan
 
-# return all result OR
-# test: http://localhost:5000/search-engine/search/sets+yifan
-@get('/search-engine/search/<inputs>')
-def search_keys(inputs, rdb):
+
+@get('/search-engine/search-all/<inputs>')
+def search_keys_AND(inputs, rdb):
+    all_json = search_keys_json_format(inputs, rdb)
+
+    values_all_json_array = all_json.values()
+    values_duplicate = []
+
+    for values in values_all_json_array:
+        for value in values:
+            values_duplicate.append(value)
+
+    values_AND_result = set()
+    values_not_duplicate = set()
+    for value in values_duplicate:
+        if value not in values_not_duplicate:
+            values_not_duplicate.add(value)
+        else:
+            values_AND_result.add(value)
+
+    return json.dumps(list(values_AND_result))
+
+
+# OR operation
+# test: http://localhost:5000/search-engine/search-any/test+yifan
+@get('/search-engine/search-any/<inputs>')
+def search_keys_OR(inputs, rdb):
+    all_json = search_keys_json_format(inputs, rdb)
+    post_id_set = set()
+    for key in all_json:
+        for value in all_json[key]:
+            post_id_set.add(value)
+    return json.dumps(list(post_id_set))
+
+# Exclude operation
+# test: http://localhost:5000/search-engine/search-exclude/test+yifan
+
+
+@get('/search-engine/search-exclude/<includeList>/<excludeList>')
+def search_keys_EXCLUDE(includeList, excludeList, rdb):
+    include_keys_values = search_keys_json_format(includeList, rdb)
+    exclude_keys_values = search_keys_json_format(excludeList, rdb)
+    print(include_keys_values)
+    print(exclude_keys_values)
+
+
+# return all and return result by key-value format
+@get('/search-engine/search/<inputs>')  # delete this line later
+def search_keys_json_format(inputs, rdb):
     keys = inputs.split('+')  # the input is splited by + sign
-    post_ids = []
+    post_ids = {}
     for key in keys:
         row = rdb.smembers(key)
         if row:
             for r in row:
-                post_ids.append(r.decode('UTF-8'))
+                # post_ids.append(r.decode('UTF-8'))
+                try:
+                    post_ids[key].append(r.decode('UTF-8'))
+                except:
+                    post_ids[key] = [r.decode('UTF-8')]
         else:
             pass
-    return str(post_ids)  # convert to json?
-
-
-f = open("./stopwords.txt", "r")
-STOP_WORDS = f.read()
-f.close()
+    return post_ids  # convert to json?
 
 
 @post('/search-engine/inverted_index/')
@@ -123,7 +174,6 @@ def inverted_index(rdb):
         print('sadd '+word+' '+post_id)
         if(len(word) > 2):  # don't save 1 or 2 letters word
             if word not in STOP_WORDS:
-                print('sadd '+word+' '+post_id)
                 rdb.sadd(word, post_id)
 
 

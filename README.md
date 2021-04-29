@@ -29,9 +29,9 @@ Returns a list of postIds whose text contains any of the words in keywordList un
 
 # Initialize:
 
-1: `make` (use a separate terminal)
+1: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1`
 
-2: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1`
+2: `make` (use a separate terminal)
 
 (option: run `make clean` ahead of `make` in case of pre-exist errors)
 

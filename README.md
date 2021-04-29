@@ -4,7 +4,7 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 # Initialize:
 
-1: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1`
+1: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1` for load balance
 
 2: `make` (use a separate terminal)
 

@@ -18,7 +18,7 @@ example of search a post:
 
 # Search Engine:
 
-#### index(postId, text) -- Adds the text of a post identified by postId to the inverted index.
+#### index(postId, text)
 
 test this function:
 
@@ -28,7 +28,7 @@ test this function:
 
 3. `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'`
 
-#### search(keyword) -- Returns a list of postIds whose text contains keyword.
+#### search(keyword)
 
 `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery'`
 
@@ -40,20 +40,20 @@ test this function:
 
 (`one` will return "14","15","16")
 
-#### any(keywordList) - OR -- Returns a list of postIds whose text contains any of the words in keywordList.
+#### any(keywordList)
 
 `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 
 (`profavery OR tuffy` will return "3","1","10","6","11","5","4")
 (`test OR one` will return "15","16","9","14","11")
 
-#### all(keywordList) - AND -- Returns a list of postIds whose text contains all of the words in keywordList.
+#### all(keywordList)
 
 `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-all/profavery+tuffy'`
 
 (`profavery AND tuffy` will return "5","11","10")
 
-#### exclude(includeList, excludeList) -- Returns a list of postIds whose text contains any of the words in includeList unless they also contain a word in excludeList.
+#### exclude(includeList, excludeList)
 
 `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
 

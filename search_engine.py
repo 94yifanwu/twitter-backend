@@ -51,51 +51,7 @@ if not sys.warnoptions:
         warnings.simplefilter('ignore', warning)
 
 
-# Simplify DB access
-#
-# Adapted from
-# <https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/#easy-querying>
-#
-def query(db, sql, args=(), one=False):
-    cur = db.execute(sql, args)
-    rv = [dict((cur.description[idx][0], value)
-          for idx, value in enumerate(row))
-          for row in cur.fetchall()]
-    cur.close()
-
-    return (rv[0] if rv else None) if one else rv
-
-
-def execute(db, sql, args=()):
-    cur = db.execute(sql, args)
-    id = cur.lastrowid
-    cur.close()
-
-    return id
-
-
-# initializing punctuations string
-# punc = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
-# Removing punctuations in string
-# Using loop + punctuation string
-'''
-for s in test_str: 
-    if s in punc: 
-        test_str = test_str.replace(s, "") 
-'''
-
-
-@get('/search-engine/<item>')
-def show_first_page(item, rdb):
-    row = rdb.get(item)
-    if row:
-        return (row)
-    return HTTPError(404, item+"  hehehe Page not found")
-
 # AND operation
-# test: http://localhost:5000/search-engine/search-all/test+yifan
-
-
 @get('/search-engine/search-all/<inputs>')
 def search_keys_AND(inputs, rdb):
     all_json = search_keys_json_format(inputs, rdb)
@@ -119,7 +75,6 @@ def search_keys_AND(inputs, rdb):
 
 
 # OR operation
-# test: http://localhost:5000/search-engine/search-any/test+yifan
 @get('/search-engine/search-any/<inputs>')
 def search_keys_OR(inputs, rdb):
     all_json = search_keys_json_format(inputs, rdb)
@@ -130,7 +85,6 @@ def search_keys_OR(inputs, rdb):
     return json.dumps(list(post_id_set))
 
 # Exclude operation
-# test: http://localhost:5000/search-engine/search-exclude/test+yifan
 
 
 @get('/search-engine/search-exclude/<includeList>/<excludeList>')
@@ -154,7 +108,7 @@ def search_keys_EXCLUDE(includeList, excludeList, rdb):
 
 
 # return all and return result by key-value format
-@get('/search-engine/search/<inputs>')  # delete this line later
+# @get('/search-engine/search/<inputs>')  # delete this line later
 def search_keys_json_format(inputs, rdb):
     keys = inputs.split('+')  # the input is splited by + sign
     post_ids = {}
@@ -172,7 +126,7 @@ def search_keys_json_format(inputs, rdb):
     return post_ids  # convert to json?
 
 
-@post('/search-engine/inverted_index/')
+@post('/search-engine/inverted-index/')
 def inverted_index(rdb):
     # get inputs
     inputs = request.json
@@ -187,3 +141,5 @@ def inverted_index(rdb):
         if(len(word) > 2):  # don't save 1 or 2 letters word
             if word not in STOP_WORDS:
                 rdb.sadd(word, post_id)
+
+    return {"post_id": post_id, "text": text}

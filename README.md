@@ -12,7 +12,7 @@ optional: run `make clean` ahead of `make` in case of pre-exist errors
 
 # Authentication:
 
-example of search a post:
+example of search a post with username = ProfAvert ana password = password:
 
 `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 

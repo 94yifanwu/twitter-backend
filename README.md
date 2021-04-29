@@ -8,7 +8,7 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 2: `make` (use a separate terminal)
 
-(option: run `make clean` ahead of `make` in case of pre-exist errors)
+option: run `make clean` ahead of `make` in case of pre-exist errors
 
 (Note: `make` creates users.db and timelines.db, create chat_table, create_secondary_table, load_dynamno_data to chat_table, and load_redis_data to inverted_index_table;
 

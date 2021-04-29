@@ -181,7 +181,6 @@ def gateway(url):
     # load balancing
     # if it's False then LB_table won't remove bad server
     turn_on_LB_table_remove = False
-    # turn_on_LB_table_remove = True    # if it's False then LB_table won't remove bad server
 
     global LB_table
     try:

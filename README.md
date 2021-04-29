@@ -10,7 +10,7 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 option: run `make clean` ahead of `make` in case of pre-exist errors
 
-(Note: `make` creates users.db and timelines.db, create chat_table, create_secondary_table, load_dynamno_data to chat_table, and load_redis_data to inverted_index_table;
+(Note: `make` creates users.db and timelines.db; create dm_dynamo_table and secondary_dm_table, load_dynamno_data to dm_dynamo.db; load redis data to inverted_index_table_redis.db;
 
 ## index(postId, text)
 

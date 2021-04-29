@@ -2,4 +2,6 @@
 __pycache__
 *.db
 .vscode/*
+init_data/delete_table_log.txt
+*.rdb
 

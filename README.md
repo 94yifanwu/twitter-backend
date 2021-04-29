@@ -30,9 +30,7 @@ test this function:
 
 #### search(keyword) -- Returns a list of postIds whose text contains keyword.
 
-option 1: use browser and enter: `http://localhost:5000/search-engine/search-any/profavery`
-
-option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery'`
+`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery'`
 
 (`profavery` will return "6","11","5","10")
 
@@ -44,26 +42,20 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 
 #### any(keywordList) - OR -- Returns a list of postIds whose text contains any of the words in keywordList.
 
-option 1: use browser and enter: `http://localhost:5000/search-engine/search-any/profavery+tuffy`
-
-option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
+`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 
 (`profavery OR tuffy` will return "3","1","10","6","11","5","4")
 (`test OR one` will return "15","16","9","14","11")
 
 #### all(keywordList) - AND -- Returns a list of postIds whose text contains all of the words in keywordList.
 
-option 1: use browser and enter: `http://localhost:5000/search-engine/search-all/profavery+tuffy`
-
-option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-all/profavery+tuffy'`
+`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-all/profavery+tuffy'`
 
 (`profavery AND tuffy` will return "5","11","10")
 
 #### exclude(includeList, excludeList) -- Returns a list of postIds whose text contains any of the words in includeList unless they also contain a word in excludeList.
 
-option 1: use browser and enter: `http://localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one`
-
-option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
+`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
 
 (`profavery OR tuffy` AND `test OR one` will return "3","1","10","6","5","4")
 

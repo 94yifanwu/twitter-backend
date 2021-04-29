@@ -104,6 +104,29 @@ def search_keys(inputs, rdb):
     return str(post_ids)  # convert to json?
 
 
+f = open("./stopwords.txt", "r")
+STOP_WORDS = f.read()
+f.close()
+
+
+@post('/search-engine/inverted_index/')
+def inverted_index(rdb):
+    # get inputs
+    inputs = request.json
+    post_id = inputs['post_id']
+    text = inputs['text'].lower()
+    text = re.sub(r'[^\w\s]', ' ', text)
+    words = text.split()
+
+    # sadd to redis - word:post_id
+    for word in words:
+        print('sadd '+word+' '+post_id)
+        if(len(word) > 2):  # don't save 1 or 2 letters word
+            if word not in STOP_WORDS:
+                print('sadd '+word+' '+post_id)
+                rdb.sadd(word, post_id)
+
+
 #STOP_WORDS = set('''the at but there of was be not use and for this what an a on have all each to are from were which in as or we she is with ine when do you his had your how that they by can their it I word said if'''.split())
 '''
 WORDS_RE = re.compile("[a-z']{2,}")

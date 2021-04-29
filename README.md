@@ -13,6 +13,7 @@ working on proj6
 index(postId, text)
 Adds the text of a post identified by postId to the inverted index.
 -- provide postID and text string.
+
 search(keyword)
 Returns a list of postIds whose text contains keyword.
 

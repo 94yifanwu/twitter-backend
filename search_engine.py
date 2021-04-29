@@ -139,6 +139,18 @@ def search_keys_EXCLUDE(includeList, excludeList, rdb):
     exclude_keys_values = search_keys_json_format(excludeList, rdb)
     print(include_keys_values)
     print(exclude_keys_values)
+    include_values = set()
+    exclude_values = set()
+
+    for values in exclude_keys_values.values():
+        for value in values:
+            exclude_values.add(value)
+    for values in include_keys_values.values():
+        for value in values:
+            if value not in exclude_values:
+                include_values.add(value)
+
+    return json.dumps(list(include_values))
 
 
 # return all and return result by key-value format

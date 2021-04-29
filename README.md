@@ -17,7 +17,7 @@ Adds the text of a post identified by postId to the inverted index.
 search(keyword)
 Returns a list of postIds whose text contains keyword.
 
-option 1: use browser and enter: `http://localhost:5000/search-engine/search/profavery`
+option 1: use browser and enter: `http://localhost:5000/search-engine/search-any/profavery`
 option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search/profavery'`
 
 any(keywordList) - OR

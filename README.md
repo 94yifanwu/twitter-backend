@@ -12,7 +12,7 @@ option: run `make clean` ahead of `make` in case of pre-exist errors
 
 (Note: `make` creates users.db and timelines.db; create dm_dynamo_table and secondary_dm_table, load_dynamno_data to dm_dynamo.db; load redis data to inverted_index_table_redis.db;
 
-## index(postId, text)
+#### index(postId, text)
 
 Adds the text of a post identified by postId to the inverted index.
 
@@ -24,7 +24,7 @@ test this function:
 
 3. `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'`
 
-## search(keyword)
+#### search(keyword)
 
 Returns a list of postIds whose text contains keyword.
 
@@ -40,7 +40,7 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 
 (`one` will return "14","15","16")
 
-## any(keywordList) - OR
+#### any(keywordList) - OR
 
 Returns a list of postIds whose text contains any of the words in keywordList.
 
@@ -51,7 +51,7 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 (`profavery OR tuffy` will return "3","1","10","6","11","5","4")
 (`test OR one` will return "15","16","9","14","11")
 
-## all(keywordList) - AND
+#### all(keywordList) - AND
 
 Returns a list of postIds whose text contains all of the words in keywordList.
 
@@ -61,7 +61,7 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 
 (`profavery AND tuffy` will return "5","11","10")
 
-## exclude(includeList, excludeList)
+#### exclude(includeList, excludeList)
 
 Returns a list of postIds whose text contains any of the words in includeList unless they also contain a word in excludeList.
 

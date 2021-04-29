@@ -24,11 +24,11 @@ example of search a post with username = ProfAvert ana password = password:
 
 `http -a ProfAvery:password -v POST 'localhost:5000/search-engine/inverted-index/' post_id="777" text="add newinput keyword to test inverted index search"`
 
-(to test this function, run `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'` before and after to see result)
+(to test this function, run `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'` before and after to compare results)
 
 #### search(keyword)
 
-`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery'`
+`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery'`
 
 (`profavery` will return "6","11","5","10")
 
@@ -40,20 +40,20 @@ example of search a post with username = ProfAvert ana password = password:
 
 #### any(keywordList)
 
-`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
+`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 
 (`profavery OR tuffy` will return "3","1","10","6","11","5","4")
 (`test OR one` will return "15","16","9","14","11")
 
 #### all(keywordList)
 
-`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-all/profavery+tuffy'`
+`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-all/profavery+tuffy'`
 
 (`profavery AND tuffy` will return "5","11","10")
 
 #### exclude(includeList, excludeList)
 
-`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
+`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
 
 (`profavery OR tuffy` AND `test OR one` will return "3","1","10","6","5","4")
 

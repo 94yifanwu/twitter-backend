@@ -20,7 +20,7 @@ example of search a post:
 
 #### index(postId, text)
 
-Adds the text of a post identified by postId to the inverted index.
+-- Adds the text of a post identified by postId to the inverted index.
 
 test this function:
 
@@ -32,7 +32,7 @@ test this function:
 
 #### search(keyword)
 
-Returns a list of postIds whose text contains keyword.
+-- Returns a list of postIds whose text contains keyword.
 
 option 1: use browser and enter: `http://localhost:5000/search-engine/search-any/profavery`
 
@@ -48,7 +48,7 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 
 #### any(keywordList) - OR
 
-Returns a list of postIds whose text contains any of the words in keywordList.
+-- Returns a list of postIds whose text contains any of the words in keywordList.
 
 option 1: use browser and enter: `http://localhost:5000/search-engine/search-any/profavery+tuffy`
 
@@ -59,7 +59,7 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 
 #### all(keywordList) - AND
 
-Returns a list of postIds whose text contains all of the words in keywordList.
+-- Returns a list of postIds whose text contains all of the words in keywordList.
 
 option 1: use browser and enter: `http://localhost:5000/search-engine/search-all/profavery+tuffy`
 
@@ -69,7 +69,7 @@ option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/sear
 
 #### exclude(includeList, excludeList)
 
-Returns a list of postIds whose text contains any of the words in includeList unless they also contain a word in excludeList.
+-- Returns a list of postIds whose text contains any of the words in includeList unless they also contain a word in excludeList.
 
 option 1: use browser and enter: `http://localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one`
 

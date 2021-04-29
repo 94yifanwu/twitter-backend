@@ -22,13 +22,9 @@ example of search a post with username = ProfAvert ana password = password:
 
 #### index(postId, text)
 
-test this function:
+`http -a ProfAvery:password -v POST 'localhost:5000/search-engine/inverted-index/' post_id="777" text="add newinput keyword to test inverted index search"`
 
-1. `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'`
-
-2. `http -a ProfAvery:password -v POST 'localhost:5000/search-engine/inverted-index/' post_id="777" text="add newinput keyword to test inverted index search"`
-
-3. `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'`
+(to test this function, run `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/newinput'` before and after to see result)
 
 #### search(keyword)
 

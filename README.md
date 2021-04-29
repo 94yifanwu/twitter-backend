@@ -18,7 +18,7 @@ example of search a post with username = ProfAvert ana password = password:
 
 # Test API
 
-## Search Engine:
+## search engine:
 
 #### index(postId, text)
 

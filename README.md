@@ -57,6 +57,10 @@ example of search a post with username = ProfAvert ana password = password:
 
 (`profavery OR tuffy` AND `test OR one` will return "3","1","10","6","5","4")
 
+#### search_and_return_text(keywords)
+
+`http -a ProfAvery:password -v GET localhost:5000/search-posts/profavery`
+
 ## direct messages
 
 Note: if Authentication is on, 'username' should be the same as 'sender'.

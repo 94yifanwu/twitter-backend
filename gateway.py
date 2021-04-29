@@ -111,6 +111,13 @@ def get_posts(username):
     return posts_array
 
 
+def get_posts_by_id(post_id):
+    response = gateway("timelines/posts.json?id=" +
+                       str(post_id)+"&_shape=array&_nl=on")
+    response = json.loads(response)
+    return response['text']
+
+
 def send_400(url_array):
     response.status = 400
     return response
@@ -139,8 +146,25 @@ def is_authenticated_user(username, password):
     return False
 
 
-@get("/home/<username>")
+# this function enter keywords to call search_engine to get post_id
+# and call timelines to get text.
+@get("/search-posts/<inputs>")
 @auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+def get_search_posts(inputs):
+    post_ids = gateway('/search-engine/search-any/'+inputs)
+    post_ids = json.loads(post_ids)
+    texts = {}
+
+    for post_id in (post_ids):
+        response = get_posts_by_id(post_id)
+        texts[post_id] = (str(response))
+
+    # print(texts)
+    return ((texts))
+
+
+@ get("/home/<username>")
+@ auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def get_feed(username):
     username_auth = (request.auth)[0]
     if username != username_auth:  # can't see other people's home feed
@@ -154,11 +178,11 @@ def get_feed(username):
         friend_posts = get_posts(friend_username)
         for friend_post in friend_posts:
             friends_posts.append(friend_post)
-    return friends_posts
+    return json.dumps(friends_posts)
 
 
-@route("<url:re:.*>", method="ANY")
-@auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+@ route("<url:re:.*>", method="ANY")
+@ auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def gateway(url):
     path = request.urlparts._replace(scheme="", netloc="").geturl()
     # remove the first char of 'url', if it's '/'
@@ -267,6 +291,6 @@ def gateway(url):
     return upstream_response.content
 
 
-@get("/favicon.ico")
+@ get("/favicon.ico")
 def fav():
     return 'fav'

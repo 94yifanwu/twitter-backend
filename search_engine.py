@@ -90,8 +90,6 @@ def search_keys_OR(inputs, rdb):
 def search_keys_EXCLUDE(includeList, excludeList, rdb):
     include_keys_values = search_keys_json_format(includeList, rdb)
     exclude_keys_values = search_keys_json_format(excludeList, rdb)
-    print(include_keys_values)
-    print(exclude_keys_values)
     include_values = set()
     exclude_values = set()
 
@@ -141,7 +139,6 @@ def inverted_index(rdb):
 
     # sadd to redis - word:post_id
     for word in words:
-        print('sadd '+word+' '+post_id)
         if(len(word) > 2):  # don't save 1 or 2 letters word
             if word not in STOP_WORDS:
                 rdb.sadd(word, post_id)

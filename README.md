@@ -6,11 +6,17 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 1: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1` for load balance
 
-2: `make` (use a separate terminal)
+2: `make` (use a separate terminal to pre-load and initial databases)
 
 option: run `make clean` ahead of `make` in case of pre-exist errors
 
-(Note: `make` creates users.db and timelines.db; create dm_dynamo_table and secondary_dm_table, load_dynamno_data to dm_dynamo.db; load redis data to inverted_index_table_redis.db;
+# Authentication:
+
+example of search a post:
+
+`$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
+
+# Search Engine:
 
 #### index(postId, text)
 
@@ -70,16 +76,6 @@ option 1: use browser and enter: `http://localhost:5000/search-engine/search-exc
 option 2: use terminal `$ http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-exclude/profavery+tuffy/test+one'`
 
 (`profavery OR tuffy` AND `test OR one` will return "3","1","10","6","5","4")
-
-# Authentication:
-
-example of get_feed:
-
-`http -a ProfAvery:password 'localhost:5000/home/ProfAvery'`
-
-example of list Direct Messages username='ProfAvery' receives:
-
-`http -a ProfAvery:password -v GET 'localhost:5000/dm/username/ProfAvery/receiver'`
 
 # Test API
 

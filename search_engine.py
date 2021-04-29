@@ -84,9 +84,8 @@ def search_keys_OR(inputs, rdb):
             post_id_set.add(value)
     return json.dumps(list(post_id_set))
 
+
 # Exclude operation
-
-
 @get('/search-engine/search-exclude/<includeList>/<excludeList>')
 def search_keys_EXCLUDE(includeList, excludeList, rdb):
     include_keys_values = search_keys_json_format(includeList, rdb)
@@ -116,14 +115,13 @@ def search_keys_json_format(inputs, rdb):
         row = rdb.smembers(key)
         if row:
             for r in row:
-                # post_ids.append(r.decode('UTF-8'))
                 try:
                     post_ids[key].append(r.decode('UTF-8'))
                 except:
                     post_ids[key] = [r.decode('UTF-8')]
         else:
             pass
-    return post_ids  # convert to json?
+    return post_ids
 
 
 @post('/search-engine/inverted-index/')
@@ -131,6 +129,12 @@ def inverted_index(rdb):
     # get inputs
     inputs = request.json
     post_id = inputs['post_id']
+
+    # Process input:
+    # Case-folding
+    # Stripping punctuation
+    # Splitting on whitespace
+    # Removing stopwords
     text = inputs['text'].lower()
     text = re.sub(r'[^\w\s]', ' ', text)
     words = text.split()

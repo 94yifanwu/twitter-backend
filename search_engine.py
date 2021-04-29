@@ -107,6 +107,7 @@ def search_keys_EXCLUDE(includeList, excludeList, rdb):
 # return all and return result by key-value format
 # @get('/search-engine/search/<inputs>')  # delete this line later
 def search_keys_json_format(inputs, rdb):
+    inputs = inputs.lower()
     keys = inputs.split('+')  # the input is splited by + sign
     post_ids = {}
     for key in keys:

@@ -131,6 +131,7 @@ def inverted_index(rdb):
     try:
         post_id = inputs['post_id']
     except:
+        response.status = 204
         return{"error": "don't have 'post_id' key"}
 
     # Process input:
@@ -147,5 +148,5 @@ def inverted_index(rdb):
         if(len(word) > 2):  # don't save 1 or 2 letters word
             if word not in STOP_WORDS:
                 rdb.sadd(word, post_id)
-
+    response.status = 201
     return {"post_id": post_id, "text": text.strip()}

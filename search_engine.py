@@ -144,4 +144,4 @@ def inverted_index(rdb):
             if word not in STOP_WORDS:
                 rdb.sadd(word, post_id)
 
-    return {"post_id": post_id, "text": text}
+    return {"post_id": post_id, "text": text.strip()}

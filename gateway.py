@@ -186,6 +186,7 @@ def get_feed(username):
 @post("/posts/")
 @auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def twitt_new_post():
+
     # authentication
     inputs = request.json
     username = inputs['username']
@@ -195,7 +196,8 @@ def twitt_new_post():
 
     # message-queue
 
-    response = gateway("message-queue/post_a_twitter")
+    response = gateway("message-queue/post-a-twitter")
+    return response
 
     '''
     1. forword this to worker
@@ -217,6 +219,7 @@ def twitt_new_post():
 @ route("<url:re:.*>", method="ANY")
 @ auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def gateway(url):
+
     path = request.urlparts._replace(scheme="", netloc="").geturl()
     # remove the first char of 'url', if it's '/'
     if "?" in path:
@@ -321,7 +324,10 @@ def gateway(url):
             continue
         response.set_header(name, value)
 
-    return upstream_response.content
+    # return (upstream_response.content.decode('ascii'))
+    # print("upstream_reponse is: "+str(upstream_response.content.decode('UTF-8')))
+    # return upstream_response.content
+    return ((upstream_response.content.decode('UTF-8')))
 
 
 @ get("/favicon.ico")

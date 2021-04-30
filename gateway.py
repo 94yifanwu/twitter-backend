@@ -13,7 +13,7 @@ import logging.config
 import itertools
 import base64
 import bottle
-from bottle import auth_basic, route, request, response, get
+from bottle import auth_basic, route, request, response, get, abort, post
 
 import requests
 
@@ -163,8 +163,8 @@ def get_search_posts(inputs):
     return ((texts))
 
 
-@ get("/home/<username>")
-@ auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+@get("/home/<username>")
+@auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def get_feed(username):
     username_auth = (request.auth)[0]
     if username != username_auth:  # can't see other people's home feed
@@ -180,9 +180,42 @@ def get_feed(username):
             friends_posts.append(friend_post)
     return json.dumps(friends_posts)
 
+# twitt a new post, using message-queue
 
-@ route("<url:re:.*>", method="ANY")
-@ auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+
+@post("/posts/")
+@auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+def twitt_new_post():
+    # authentication
+    inputs = request.json
+    username = inputs['username']
+    username_auth = (request.auth)[0]
+    if username != username_auth:
+        abort(401, 'username not login')
+
+    # message-queue
+
+    response = gateway("message-queue/")
+
+    '''
+    1. forword this to worker 
+    2. return 202 Accept
+
+    '''
+
+    '''
+    response = gateway("timelines/posts.json?username=" +
+                       username + "&_shape=array")
+    response = json.loads(response)
+    posts_array = []
+    for res in response:
+        posts_array.append(res["text"])
+    return posts_array
+    '''
+
+
+@route("<url:re:.*>", method="ANY")
+@auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def gateway(url):
     path = request.urlparts._replace(scheme="", netloc="").geturl()
     # remove the first char of 'url', if it's '/'
@@ -233,7 +266,7 @@ def gateway(url):
 
     upstream_url = upstream_server + "/" + url
 
-    #logging.debug("Upstream URL: %s", upstream_url)
+    logging.debug("Upstream URL: %s", upstream_url)
 
     headers = {}
     for name, value in request.headers.items():

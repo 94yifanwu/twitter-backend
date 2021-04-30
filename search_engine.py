@@ -127,7 +127,11 @@ def search_keys_json_format(inputs, rdb):
 def inverted_index(rdb):
     # get inputs
     inputs = request.json  # post_id and text
-    post_id = inputs['post_id']
+    post_id = ""
+    try:
+        post_id = inputs['post_id']
+    except:
+        return{"error": "don't have 'post_id' key"}
 
     # Process input:
     # Case-folding

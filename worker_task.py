@@ -32,6 +32,7 @@ def worker_post_a_twitter(inputs):
 
 def worker_inverted_index(inputs):
     logging.debug("worker_inverted_index")
+    print(inputs)
     server_search_engine = (servers_list['search-engine'][0])
     headers = {}
     headers["Content-Type"] = "application/json"

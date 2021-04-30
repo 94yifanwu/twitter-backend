@@ -23,14 +23,12 @@ q = Queue(connection=redis_conn)
 @post('/message-queue/post-a-twitter')
 def post_a_twitter(rdb):
     inputs = request.body
-    job = q.enqueue(worker_post_a_twitter, inputs)
-    # after get result
-    time.sleep(3)  # change this to work-dependency #
-    new_post = (job.result).decode('UTF-8')
-    print(new_post)
-    # dependent to post_id
-    if 'post_id' in new_post:
-        job = q.enqueue(worker_inverted_index, job.result)
+    job_post = q.enqueue(worker_post_a_twitter, inputs)
+
+    time.sleep(1)  # change this to work-dependency #
+
+    q.enqueue(worker_inverted_index, job_post.result, depends_on=job_post)
+
     response.status = 202
     # response.body = "Accepted, submitting to timelines service"
     # return response.content

@@ -29,9 +29,9 @@ def json_config(key):
 #
 app = bottle.default_app()
 app.config.load_config("./etc/gateway.ini")
-
 logging.config.fileConfig(app.config["logging.config"])
 
+logging.disable(logging.CRITICAL)  # use this to show logging.debug message
 
 # If you want to see traffic being sent from and received by calls to
 # the Requests library, add the following to etc/gateway.ini:
@@ -53,6 +53,8 @@ if json_config("logging.requests"):
 #
 # Adapted from <https://stackoverflow.com/a/39818780>
 #
+
+
 def json_error_handler(res):
     if res.content_type == "application/json":
         return res.body
@@ -97,6 +99,7 @@ def get_following(username):
     response = json.loads(response)
     following_array = []
     for res in response:
+        logging.debug
         following_array.append(res["friendname"])
     return following_array
 
@@ -159,7 +162,6 @@ def get_search_posts(inputs):
         response = get_posts_by_id(post_id)
         texts[post_id] = (str(response))
 
-    # print(texts)
     return ((texts))
 
 
@@ -252,7 +254,7 @@ def gateway(url):
 
     upstream_url = upstream_server + "/" + url
 
-    #logging.debug("Upstream URL: %s", upstream_url)
+    logging.debug("Upstream URL: %s", upstream_url)
 
     headers = {}
     for name, value in request.headers.items():

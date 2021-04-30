@@ -195,10 +195,10 @@ def twitt_new_post():
 
     # message-queue
 
-    response = gateway("message-queue/twitt-a-post")
+    response = gateway("message-queue/post_a_twitter")
 
     '''
-    1. forword this to worker 
+    1. forword this to worker
     2. return 202 Accept
 
     '''
@@ -214,8 +214,8 @@ def twitt_new_post():
     '''
 
 
-@route("<url:re:.*>", method="ANY")
-@auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+@ route("<url:re:.*>", method="ANY")
+@ auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def gateway(url):
     path = request.urlparts._replace(scheme="", netloc="").geturl()
     # remove the first char of 'url', if it's '/'
@@ -286,7 +286,7 @@ def gateway(url):
             stream=True,
         )
     except requests.exceptions.RequestException as e:
-        # logging.exception(e)
+        logging.exception(e)
         response.status = 503
         return {
             "method": e.request.method,

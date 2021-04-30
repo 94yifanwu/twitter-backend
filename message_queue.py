@@ -8,6 +8,7 @@ import logging
 import sys
 import logging.config
 import bottle
+import textwrap
 import re
 import json
 from bottle import get, post, error, abort, request, response, HTTPResponse, redirect, HTTPError
@@ -39,9 +40,12 @@ if not sys.warnoptions:
         warnings.simplefilter('ignore', warning)
 
 
-@post('/message-queue/twitt-a-post')
-def aaaaaa(rdb):
-    return "hellooooo"
+@post('/message-queue/post_a_twitter')
+def post_a_twitter(rdb):
+
+    inputs = (request.json)
+    print(inputs['text'])
+    return 'hello'
 
 
 # use redis by default

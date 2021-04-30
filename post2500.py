@@ -1,7 +1,9 @@
 
-def print2500():
-    for i in range(2500):
-        print(str({"username": "ProfAvery", "text": "this is text"+str(i)})+",")
+def print2500(n):
+    print("{")
+    for i in range(n):
+        print('"name": "ProfAvery", "text": "this is text'+str(i)+'",')
+    print("}")
 
 
-print2500()
+print2500(250)

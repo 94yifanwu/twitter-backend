@@ -4,6 +4,46 @@ from task import add
 import time
 import logging
 
+
+import sys
+import logging.config
+import bottle
+import re
+import json
+from bottle import get, post, error, abort, request, response, HTTPResponse, redirect, HTTPError
+from bottle.ext import redis
+
+
+# Set up app, plugins, and logging
+#
+app = bottle.default_app()
+app.config.load_config('./etc/conf.ini')
+plugin = bottle.ext.redis.RedisPlugin(host='localhost')
+app.install(plugin)
+logging.config.fileConfig(app.config['logging.config'])
+
+
+def json_error_handler(res):
+    if res.content_type == 'application/json':
+        return res.body
+    res.content_type = 'application/json'
+    if res.body == 'Unknown Error.':
+        res.body = bottle.HTTP_CODES[res.status_code]
+    return bottle.json_dumps({'error': res.body})
+
+
+app.default_error_handler = json_error_handler
+if not sys.warnoptions:
+    import warnings
+    for warning in [DeprecationWarning, ResourceWarning]:
+        warnings.simplefilter('ignore', warning)
+
+
+@post('/message-queue/twitt-a-post')
+def aaaaaa(rdb):
+    return "hellooooo"
+
+
 # use redis by default
 # create work queue
 redis_conn = Redis()

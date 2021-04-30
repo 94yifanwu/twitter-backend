@@ -195,7 +195,7 @@ def twitt_new_post():
 
     # message-queue
 
-    response = gateway("message-queue/")
+    response = gateway("message-queue/twitt-a-post")
 
     '''
     1. forword this to worker 

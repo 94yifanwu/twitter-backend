@@ -183,7 +183,7 @@ def get_feed(username):
 # twitt a new post, using message-queue
 
 
-@post("/posts/")
+@post("/posts-async/")
 @auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def twitt_new_post():
 
@@ -195,25 +195,8 @@ def twitt_new_post():
         abort(401, 'username not login')
 
     # message-queue
-
     response = gateway("message-queue/post-a-twitter")
     return response
-
-    '''
-    1. forword this to worker
-    2. return 202 Accept
-
-    '''
-
-    '''
-    response = gateway("timelines/posts.json?username=" +
-                       username + "&_shape=array")
-    response = json.loads(response)
-    posts_array = []
-    for res in response:
-        posts_array.append(res["text"])
-    return posts_array
-    '''
 
 
 @ route("<url:re:.*>", method="ANY")

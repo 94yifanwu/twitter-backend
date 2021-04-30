@@ -20,7 +20,13 @@ example of search a post with username = ProfAvert ana password = password:
 
 ## message queue:
 
-#### postTweet()
+#### twite
+
+asynchously post-a-twitter to timelines server and inverted-index to redis search engine
+
+`http -a ProfAvery:password POST 'localhost:5000/posts-async/' username="ProfAvery" text='******worker111sss1111******************'`
+
+#### post_tweet() + inverted_index() asynchronously
 
 `http -a ProfAvery:password POST 'localhost:5000/message-queue/post-a-twitter' username="ProfAvery" text='****** new worker 1 *********'`
 

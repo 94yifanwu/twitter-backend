@@ -25,7 +25,7 @@ def post_a_twitter(rdb):
     inputs = request.body
     job = q.enqueue(worker_post_a_twitter, inputs)
     # after get result
-    time.sleep(3)
+    time.sleep(3)  # change this to work-dependency #
     new_post = (job.result).decode('UTF-8')
     print(new_post)
     # dependent to post_id

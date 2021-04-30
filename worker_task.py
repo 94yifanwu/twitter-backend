@@ -1,5 +1,4 @@
-# because i don't have timelines (proj2) service running, so i use this module to
-# involke sandman
+# use this file and let worker to call it.
 import logging.config
 import bottle
 import json

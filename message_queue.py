@@ -25,9 +25,9 @@ def post_a_twitter(rdb):
     inputs = request.body
     job_post = q.enqueue(worker_post_a_twitter, inputs)
 
-    time.sleep(1)  # change this to work-dependency #
-
-    q.enqueue(worker_inverted_index, job_post.result, depends_on=job_post)
+    #time.sleep(1)  # change this to work-dependency #
+    print(job_post.id)
+    q.enqueue(worker_inverted_index, (job_post.id), depends_on=job_post)
 
     response.status = 202
     # response.body = "Accepted, submitting to timelines service"

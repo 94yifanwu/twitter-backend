@@ -5,13 +5,16 @@ import json
 import requests
 import sys
 from bottle import get, post, error, abort, request, response, HTTPResponse, redirect, HTTPError
-
+from rq import Queue
+from redis import Redis
 
 app = bottle.default_app()
 app.config.load_config('./etc/gateway.ini')
 logging.config.fileConfig(app.config['logging.config'])
 
 servers_list = json.loads(app.config['proxy.upstreams'])
+redis_conn = Redis()
+q = Queue(connection=redis_conn)
 
 
 def worker_post_a_twitter(inputs):
@@ -30,8 +33,9 @@ def worker_post_a_twitter(inputs):
     return response.content
 
 
-def worker_inverted_index(inputs):
+def worker_inverted_index(queue_id):
     logging.debug("worker_inverted_index")
+    inputs = q.fetch_job(queue_id).result
     print(inputs)
     server_search_engine = (servers_list['search-engine'][0])
     headers = {}

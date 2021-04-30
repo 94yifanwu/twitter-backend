@@ -36,7 +36,7 @@ def worker_post_a_twitter(inputs):
 def worker_inverted_index(queue_id):
     logging.debug("worker_inverted_index")
     inputs = q.fetch_job(queue_id).result
-    print(inputs)
+
     server_search_engine = (servers_list['search-engine'][0])
     headers = {}
     headers["Content-Type"] = "application/json"

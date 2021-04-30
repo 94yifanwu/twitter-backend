@@ -31,7 +31,7 @@ app = bottle.default_app()
 app.config.load_config("./etc/gateway.ini")
 logging.config.fileConfig(app.config["logging.config"])
 
-logging.disable(logging.CRITICAL)  # use this to show logging.debug message
+# logging.disable(logging.CRITICAL)  # use this to show logging.debug message
 
 # If you want to see traffic being sent from and received by calls to
 # the Requests library, add the following to etc/gateway.ini:
@@ -255,6 +255,7 @@ def gateway(url):
     upstream_url = upstream_server + "/" + url
 
     logging.debug("Upstream URL: %s", upstream_url)
+    logging.debug("Request Body: %s", request.json)
 
     headers = {}
     for name, value in request.headers.items():

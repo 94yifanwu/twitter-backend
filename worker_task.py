@@ -17,9 +17,6 @@ redis_conn = Redis()
 q = Queue(connection=redis_conn)
 
 
-logging.disable(logging.CRITICAL)
-
-
 def worker_post_a_twitter(inputs):
     logging.debug("in worker_post_a_twitter")
     server_posts = (servers_list['posts'][0])

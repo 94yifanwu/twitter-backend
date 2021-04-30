@@ -12,6 +12,8 @@ app = bottle.default_app()
 app.config.load_config('./etc/gateway.ini')
 logging.config.fileConfig(app.config['logging.config'])
 
+logging.disable(logging.CRITICAL)  # use this to show logging.debug message
+
 servers_list = json.loads(app.config['proxy.upstreams'])
 redis_conn = Redis()
 q = Queue(connection=redis_conn)

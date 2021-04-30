@@ -18,16 +18,18 @@ app.install(plugin)
 logging.config.fileConfig(app.config['logging.config'])
 redis_conn = Redis()
 q = Queue(connection=redis_conn)
+q1 = Queue('low', connection=redis_conn)
+q2 = Queue('high', connection=redis_conn)
 
 
 @post('/message-queue/post-a-twitter')
 def post_a_twitter(rdb):
     inputs = request.body
-    job_post = q.enqueue(worker_post_a_twitter, inputs)
 
-    q.enqueue(worker_inverted_index, (job_post.id), depends_on=job_post)
+    job_post = q.enqueue(worker_post_a_twitter, inputs)  # return post_id
+
+    q.enqueue(worker_inverted_index, job_post.id,
+              depend_on=job_post)  # send post_id and text
 
     response.status = 202
-    # response.body = "Accepted, submitting to timelines service"
-    # return response.content
     return {"Accepted": "submitting to timelines service"}

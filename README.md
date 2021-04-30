@@ -18,6 +18,12 @@ example of search a post with username = ProfAvert ana password = password:
 
 # Test API
 
+## message queue:
+
+#### postTweet()
+
+`http -a ProfAvery:password POST 'localhost:5000/message-queue/post-a-twitter' username="ProfAvery" text='****** new worker 1 *********'`
+
 ## search engine:
 
 #### index(postId, text)

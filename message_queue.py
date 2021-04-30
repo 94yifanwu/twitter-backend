@@ -31,10 +31,3 @@ def post_a_twitter(rdb):
     # response.body = "Accepted, submitting to timelines service"
     # return response.content
     return {"Accepted": "submitting to timelines service"}
-
-
-'''
-job = q.enqueue(add, 6, 9)
-time.sleep(3)
-print("result is %s", job.result)
-'''

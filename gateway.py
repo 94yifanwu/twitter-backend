@@ -269,7 +269,7 @@ def gateway(url):
 
     upstream_url = upstream_server + "/" + url
 
-    logging.debug("Upstream URL: %s", upstream_url)
+    #logging.debug("Upstream URL: %s", upstream_url)
 
     headers = {}
     for name, value in request.headers.items():

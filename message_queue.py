@@ -1,4 +1,4 @@
-from worker_task import worker_post_a_twitter
+from worker_task import worker_post_a_twitter, worker_inverted_index
 #from search_engine import inverted_index
 from rq import Queue, use_connection
 from redis import Redis
@@ -24,14 +24,14 @@ q = Queue(connection=redis_conn)
 def post_a_twitter(rdb):
     inputs = request.body
     job = q.enqueue(worker_post_a_twitter, inputs)
+    # after get result
+    time.sleep(3)
+    new_post = (job.result).decode('UTF-8')
+    print(new_post)
+    # dependent to post_id
+    if 'post_id' in new_post:
+        job = q.enqueue(worker_inverted_index, job.result)
     response.status = 202
     # response.body = "Accepted, submitting to timelines service"
     # return response.content
     return {"Accepted": "submitting to timelines service"}
-
-
-'''
-job = q.enqueue(add, 6, 9)
-time.sleep(3)
-print("result is %s", job.result)
-'''

@@ -126,7 +126,7 @@ def search_keys_json_format(inputs, rdb):
 @post('/search-engine/inverted-index/')
 def inverted_index(rdb):
     # get inputs
-    inputs = request.json
+    inputs = request.json  # post_id and text
     post_id = inputs['post_id']
 
     # Process input:

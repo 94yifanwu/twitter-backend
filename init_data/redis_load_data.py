@@ -17,7 +17,7 @@ def create_connection(db_file):
 
 def query(conn):
     cur = conn.cursor()
-    cur.execute("SELECT id,text FROM posts")
+    cur.execute("SELECT post_id,text FROM posts")
     rows = cur.fetchall()
     return rows
 

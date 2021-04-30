@@ -1,7 +1,7 @@
 PRAGMA foreign_keys=ON;
 
 CREATE TABLE IF NOT EXISTS posts (
-    id          INTEGER PRIMARY KEY,
+    post_id          INTEGER PRIMARY KEY,
     username    INTEGER NOT NULL,
     text        TEXT NOT NULL,
     timestamp   INTEGER DEFAULT CURRENT_TIMESTAMP

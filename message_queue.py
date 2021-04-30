@@ -1,4 +1,5 @@
 from worker_task import worker_post_a_twitter
+#from search_engine import inverted_index
 from rq import Queue, use_connection
 from redis import Redis
 import sys
@@ -10,9 +11,6 @@ from bottle import get, post, error, abort, request, response, HTTPResponse, red
 from bottle.ext import redis
 import time
 
-
-# Set up app, plugins, and logging
-#
 app = bottle.default_app()
 app.config.load_config('./etc/conf.ini')
 plugin = bottle.ext.redis.RedisPlugin(host='localhost')
@@ -26,8 +24,14 @@ q = Queue(connection=redis_conn)
 def post_a_twitter(rdb):
     inputs = request.body
     job = q.enqueue(worker_post_a_twitter, inputs)
-    time.sleep(3)
     response.status = 202
     # response.body = "Accepted, submitting to timelines service"
     # return response.content
     return {"Accepted": "submitting to timelines service"}
+
+
+'''
+job = q.enqueue(add, 6, 9)
+time.sleep(3)
+print("result is %s", job.result)
+'''

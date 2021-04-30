@@ -1,3 +1,5 @@
+# because i don't have timelines (proj2) service running, so i use this module to
+# involke sandman
 import logging.config
 import bottle
 import json

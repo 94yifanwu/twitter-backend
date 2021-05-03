@@ -6,7 +6,9 @@ Servers: Users Server, Posts Server, API Gateway / Load Balance Server, Direct M
 
 Database: SQLite3, DynamoDB, Redis, Redis-Queue
 
-Tools: Sandman2, Datasette, NoSQL Workbench, Apache Benchmark,
+Tools: Sandman2, Datasette, NoSQL Workbench, Apache Benchmark
+
+Diagram: https://drive.google.com/file/d/1y3z-DT1PL2G4VL8Yw7wAcBpvwZqLpXM7/view?usp=sharing
 
 This project includes API gateway, load balace, basic authentication for micro blog services. DynamoDB for directly messages services. Redis for inverted-index search engine to search posts contents.
 

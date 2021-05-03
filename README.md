@@ -2,7 +2,7 @@
 
 Framework: Python Flask/Bottle
 
-Servers: Users Server, Posts Server, API Gateway / Load Balance Server, Direct Message Server, Search Engine Server, Message Queue Server.
+Servers: Users Server, Posts Server, API Gateway / Load Balance Server, Direct Message Server, Search Engine Cache Server, Message Queue Async Server.
 
 Database: SQLite3, DynamoDB, Redis, Redis-Queue
 
@@ -12,7 +12,7 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 # Initialize:
 
-1: `foreman start` or `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,dynamoDB=1,redis=1` for load balance
+1: `foreman start -m gateway=1,users=1,timelines=3,user-queries=1,timeline-queries=1,direct-messages=1,search-engine=1,message-queue=1,dynamoDB=1,redis=1,worker=1` (for load balance)
 
 2: `make` (use a separate terminal to pre-load and initial databases)
 

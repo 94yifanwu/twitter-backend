@@ -16,11 +16,11 @@ This project includes API gateway, load balace, basic authentication for micro b
 
 2: `make` (use a separate terminal to pre-load and initial databases)
 
-optional: run `make clean` ahead of `make` in case of pre-exist errors
+optional: run `make clean` ahead of `make` in case of pre-exist table errors
 
 # Authentication:
 
-example of search a post with username = ProfAvert ana password = password:
+example of search a post with username = ProfAvert and password = password:
 
 `http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
 

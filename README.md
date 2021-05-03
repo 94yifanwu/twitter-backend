@@ -1,4 +1,12 @@
-# 449-proj67-bottle-gateway-dynamoDB-redis
+# ptyhon-microservice
+
+Framework: Python Flask/Bottle
+
+Servers: Users Server, Posts Server, API Gateway / Load Balance Server, Direct Message Server, Search Engine Server, Message Queue Server.
+
+Database: SQLite3, DynamoDB, Redis, Redis-Queue
+
+Tools: Sandman2, Datasette, NoSQL Workbench, Apache Benchmark,
 
 This project includes API gateway, load balace, basic authentication for micro blog services. DynamoDB for directly messages services. Redis for inverted-index search engine to search posts contents.
 

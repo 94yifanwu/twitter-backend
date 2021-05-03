@@ -30,7 +30,7 @@ example of search a post with username = ProfAvert and password = password:
 
 #### post_tweet() + inverted_index() asynchronously
 
-`http -a ProfAvery:password POST 'localhost:5000/posts-async/' username="ProfAvery" text='******worker111sss1111******************'`
+`http -a ProfAvery:password POST 'localhost:5000/posts-async/' username="ProfAvery" text='This is a newwordtotest test'`
 
 ### report sync & async
 

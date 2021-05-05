@@ -24,7 +24,7 @@ optional: run `make clean` ahead of `make` in case of pre-exist table errors
 
 example of search a post with username = ProfAvert and password = password:
 
-`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any/profavery+tuffy'`
+`http -a ProfAvery:password -v GET 'localhost:5000/search-engine/search-any?q=profavery+tuffy'`
 
 # Test API
 

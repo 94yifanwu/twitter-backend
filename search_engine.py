@@ -52,8 +52,9 @@ if not sys.warnoptions:
 
 
 # AND operation
-@get('/search-engine/search-all/<inputs>')
-def search_keys_AND(inputs, rdb):
+@get('/search-engine/search-all')
+def search_keys_AND(rdb):
+    inputs = request.query.q
     all_json = search_keys_json_format(inputs, rdb)
 
     values_all_json_array = all_json.values()
@@ -75,8 +76,9 @@ def search_keys_AND(inputs, rdb):
 
 
 # OR operation
-@get('/search-engine/search-any/<inputs>')
-def search_keys_OR(inputs, rdb):
+@get('/search-engine/search-any')
+def search_keys_OR(rdb):
+    inputs = request.query.q
     all_json = search_keys_json_format(inputs, rdb)
     post_id_set = set()
     for key in all_json:
@@ -86,8 +88,10 @@ def search_keys_OR(inputs, rdb):
 
 
 # Exclude operation
-@get('/search-engine/search-exclude/<includeList>/<excludeList>')
-def search_keys_EXCLUDE(includeList, excludeList, rdb):
+@get('/search-engine/search-exclude')
+def search_keys_EXCLUDE(rdb):
+    includeList = request.query.q
+    excludeList = request.query.exclude
     include_keys_values = search_keys_json_format(includeList, rdb)
     exclude_keys_values = search_keys_json_format(excludeList, rdb)
     include_values = set()
@@ -105,10 +109,9 @@ def search_keys_EXCLUDE(includeList, excludeList, rdb):
 
 
 # return all and return result by key-value format
-# @get('/search-engine/search/<inputs>')  # delete this line later
 def search_keys_json_format(inputs, rdb):
     inputs = inputs.lower()
-    keys = inputs.split('+')  # the input is splited by + sign
+    keys = inputs.split()  # the input is splited by + sign
     post_ids = {}
     for key in keys:
         row = rdb.smembers(key)

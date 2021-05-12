@@ -4,4 +4,5 @@ __pycache__
 .vscode/*
 init_data/delete_table_log.txt
 *.rdb
-
+async.txt
+sync.txt

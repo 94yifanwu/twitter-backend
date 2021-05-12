@@ -3,11 +3,9 @@ import logging.config
 import bottle
 import json
 import requests
-import sys
 from bottle import get, post, error, abort, request, response, HTTPResponse, redirect, HTTPError
 from rq import Queue
 from redis import Redis
-import time
 
 
 app = bottle.default_app()
@@ -43,7 +41,7 @@ def worker_inverted_index(queue_id):
     logging.debug("worker_inverted_index")
     # time.sleep(2)
     inputs = q1.fetch_job(queue_id).result
-    logging.debug(inputs) 
+    logging.debug(inputs)
 
     #inputs_result = inputs.result
     #logging.debug("inputs_result is: "+str(inputs_result))

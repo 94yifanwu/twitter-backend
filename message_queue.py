@@ -1,15 +1,10 @@
 from worker_task import worker_post_a_twitter, worker_inverted_index
-#from search_engine import inverted_index
 from rq import Queue, use_connection
 from redis import Redis
-import sys
 import logging.config
 import bottle
-import json
-import requests
 from bottle import get, post, error, abort, request, response, HTTPResponse, redirect, HTTPError
 from bottle.ext import redis
-import time
 
 app = bottle.default_app()
 app.config.load_config('./etc/conf.ini')

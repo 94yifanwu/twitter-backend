@@ -36,9 +36,9 @@ example of search a post with username = ProfAvert and password = password:
 
 ### report sync & async
 
-`ab -p post_data.json -T application/json -A 'ProfAvery:password' -n 250 -c 5 http://127.0.0.1:5000/posts-async/ > async.txt &`
+`ab -p ab_post_data.json -T application/json -A 'ProfAvery:password' -n 250 -c 5 http://127.0.0.1:5000/posts-async/ > async.txt &`
 
-`ab -p post_data.json -T application/json -A 'ProfAvery:password' -n 250 -c 5 http://127.0.0.1:5000/posts/ > sync.txt &`
+`ab -p ab_post_data.json -T application/json -A 'ProfAvery:password' -n 250 -c 5 http://127.0.0.1:5000/posts/ > sync.txt &`
 
 ## search engine:
 

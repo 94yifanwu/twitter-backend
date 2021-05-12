@@ -186,7 +186,7 @@ def get_feed(username):
 
 
 @post("/posts-async/")
-@auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
+# @auth_basic(is_authenticated_user, realm="private", text="Unauthorized")
 def twitt_new_post():
 
     # authentication
@@ -257,7 +257,7 @@ def gateway(url):
     upstream_url = upstream_server + "/" + url
 
     logging.debug("Upstream URL: %s", upstream_url)
-    logging.debug("Request Body: %s", request.query.q)
+    logging.debug("Request Body: %s", request.json)
 
     headers = {}
     for name, value in request.headers.items():

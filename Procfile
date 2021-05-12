@@ -9,4 +9,5 @@ search-engine: python3 -m bottle --bind=localhost:$PORT --debug --reload search_
 message-queue: python3 -m bottle --bind=localhost:$PORT --debug --reload message_queue
 dynamoDB: java -Djava.library.path=./dynamodb_local/DynamoDBLocal_lib -jar ./dynamodb_local/DynamoDBLocal.jar -sharedDb
 redis: redis-server --port 6379
-worker: rq worker --disable-job-desc-logging --quiet
+worker: rq worker high default low --disable-job-desc-logging --quiet
+

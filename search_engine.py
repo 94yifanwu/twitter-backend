@@ -147,9 +147,11 @@ def inverted_index(rdb):
     words = text.split()
 
     # sadd to redis - word:post_id
+    is_word_exist = 0
     for word in words:
         if(len(word) > 2):  # don't save 1 or 2 letters word
             if word not in STOP_WORDS:
-                rdb.sadd(word, post_id)
-    response.status = 201
+                is_word_exist = rdb.sadd(word, post_id)
+                if(is_word_exist == 1):
+                    response.status = 201
     return {"post_id": post_id, "text": text.strip()}

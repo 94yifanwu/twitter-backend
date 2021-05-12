@@ -4,7 +4,7 @@ Framework: Python Flask/Bottle
 
 Servers: Users Server + Posts Server + API Gateway and Load Balance Server + Direct Message Server + Search Engine Cache Server + Message Queue Async Server.
 
-Database: SQLite3, DynamoDB, Redis, Redis-Queue
+Database: SQLite3, DynamoDB, Redis
 
 Tools: Sandman2, Datasette, NoSQL Workbench, Apache Benchmark
 

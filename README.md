@@ -6,7 +6,7 @@ Servers: Users Server + Posts Server + API Gateway and Load Balance Server + Dir
 
 Database: SQLite3, DynamoDB, Redis
 
-Tools: Sandman2, Datasette, NoSQL Workbench, Apache Benchmark
+Tools: Foreman, Sandman2, Datasette, NoSQL Workbench, Apache Benchmark
 
 Diagram: https://drive.google.com/file/d/1y3z-DT1PL2G4VL8Yw7wAcBpvwZqLpXM7/view?usp=sharing
 

@@ -6,6 +6,7 @@
 # in this project, database_name is to indicate the url path element.
 # for example, localhost:5100/users/users.json , users is database and users.json is table/query
 
+from swagger_ui import api_doc
 import sys
 import json
 import http.client
@@ -20,6 +21,8 @@ import requests
 
 # Allow JSON values to be loaded from app.config[key]
 #
+
+
 def json_config(key):
     value = app.config[key]
     return json.loads(value)
@@ -30,6 +33,8 @@ def json_config(key):
 app = bottle.default_app()
 app.config.load_config("./etc/gateway.ini")
 logging.config.fileConfig(app.config["logging.config"])
+
+api_doc(app, config_path='etc/test.yaml', url_prefix='/api/doc')
 
 logging.disable(logging.CRITICAL)  # use this to show logging.debug message
 

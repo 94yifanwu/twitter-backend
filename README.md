@@ -1,4 +1,4 @@
-# ptyhon-microservice
+# python-microservice
 
 Framework: Python Flask/Bottle
 

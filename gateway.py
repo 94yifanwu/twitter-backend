@@ -34,7 +34,7 @@ app = bottle.default_app()
 app.config.load_config("./etc/gateway.ini")
 logging.config.fileConfig(app.config["logging.config"])
 
-api_doc(app, config_path='etc/test.yaml', url_prefix='/api/doc')
+api_doc(app, config_path='etc/swagger-ui.yaml', url_prefix='/api/doc')
 
 logging.disable(logging.CRITICAL)  # use this to show logging.debug message
 

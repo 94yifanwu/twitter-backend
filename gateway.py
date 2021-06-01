@@ -222,12 +222,12 @@ def gateway(url):
 
     # logging.debug('url is: '+url)
     # logging.debug('path is: '+path)
-    #logging.debug("url_array is: " + str(url_array))
+    # logging.debug("url_array is: " + str(url_array))
     # sys.exit()
 
     if ".json" in url:
         database_name += "/*"
-    if "?" in url:
+    elif "?" in url:
         database_name += "/*"
 
     # load balancing

@@ -154,6 +154,12 @@ def is_authenticated_user(username, password):
     return False
 
 
+@get("api/doc")
+def he():
+    print('open swagger')
+    api_doc(app, config_path='etc/swagger-ui.yaml', url_prefix='/api/doc')
+
+
 # this function enter keywords to call search_engine to get post_id
 # and call timelines to get text.
 @get("/search-posts/<inputs>")
